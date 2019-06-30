@@ -13,7 +13,7 @@ import { mergeMap, takeUntil, skipUntil, repeat } from 'rxjs/operators';
   styleUrls: ['./square.component.css']
 })
 export class SquareComponent implements OnInit {
-  // element Selectors
+  // element Selectors:
   @ViewChild('moveSquare', { static: true}) element: ElementRef;
   @ViewChild('faceSpan', {static: true}) faceSpan: ElementRef;
   
@@ -27,21 +27,23 @@ export class SquareComponent implements OnInit {
   startX: number;
   startY: number;
 
-  // starting position in the center of the screen
+  // starting position in the center of the screen, not necessary
   position = { top: '50%', left: '50%', transform: 'translate(-50%, -50%)'};
 
+  // only for fun
   cursor: string;
   
 
   constructor() { }
 
   ngOnInit() {
+    // get All the Observables from mouse events
     this.move$ = fromEvent(this.element.nativeElement, 'mousemove');
     this.down$ = fromEvent(this.element.nativeElement, 'mousedown');
     this.up$ = fromEvent(this.element.nativeElement, 'mouseup');
     this.leave$ = fromEvent(this.element.nativeElement, 'mouseleave');
 
-
+    
     this.down$.pipe(
       mergeMap(down => this.move$.pipe(
         takeUntil(this.up$),

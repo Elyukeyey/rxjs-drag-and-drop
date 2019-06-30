@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
     <p>with RxJS and Angular</p>
   </header>
   `,
-  styleUrls: ['./header.component.css'],
   styles: [`header {
       width: 100%;
       text-align: center;
