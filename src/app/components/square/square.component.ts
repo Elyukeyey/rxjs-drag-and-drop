@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { Observable, fromEvent, of } from 'rxjs';
-import { mergeMap, takeUntil, skipUntil, repeat } from 'rxjs/operators';
+import { mergeMap, takeUntil, skipUntil, repeat, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-square',
@@ -45,7 +45,7 @@ export class SquareComponent implements OnInit {
 
     
     this.down$.pipe(
-      mergeMap(down => this.move$.pipe(
+      switchMap(down => this.move$.pipe(
         takeUntil(this.up$),
         takeUntil(this.leave$)
         )
